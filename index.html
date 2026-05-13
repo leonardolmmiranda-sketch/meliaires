@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es-419">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MeliAir | Calculadoras</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --yellow:#FFE600;--yellow-dark:#E6CF00;
+  --lav-bg:#F4F2FF;--lav-border:#DDD9F9;
+  --lav-main:#7F77DD;--lav-dark:#534AB7;--lav-deeper:#26215C;
+  --text:#333;--gray:#717171;--border:#EBEBEB;--white:#FFF;
+  --sky:#E8F4FD;--sky-border:#B3D9F5;--sky-main:#2196F3;--sky-dark:#0D47A1;--sky-deeper:#0A2E6E;
+  --teal:#0D8FAD;
+}
+body{font-family:'Inter',sans-serif;background:#F0F0F0;color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+header{background:var(--yellow);height:60px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--yellow-dark)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:36px;height:36px;background:var(--teal);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.logo-mark svg{width:20px;height:20px}
+.logo-name{font-family:'Raleway',sans-serif;font-weight:800;font-size:17px;color:var(--lav-deeper)}
+.logo-sub{font-size:10px;font-weight:600;color:var(--lav-dark);letter-spacing:1px;text-transform:uppercase;margin-top:1px}
+.header-right{display:flex;align-items:center;gap:10px}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--lav-deeper);background:rgba(255,255,255,0.75);padding:5px 14px;border-radius:20px;border:1px solid var(--yellow-dark);text-decoration:none;transition:background .15s}
+.back-link:hover{background:white}
+.back-link svg{width:13px;height:13px}
+.lang-badge{font-size:12px;font-weight:600;color:var(--lav-deeper);background:rgba(255,255,255,0.5);padding:5px 14px;border-radius:20px;border:1px solid var(--yellow-dark)}
+.hero{background:var(--yellow);padding:3rem 2rem 2.5rem;text-align:center;border-bottom:3px solid var(--yellow-dark);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(255,255,255,0.08) 40px,rgba(255,255,255,0.08) 80px);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:white;margin-bottom:14px;background:var(--teal);padding:6px 18px;border-radius:20px;position:relative;z-index:1}
+.hero h1{font-family:'Raleway',sans-serif;font-size:clamp(26px,4vw,42px);font-weight:900;color:var(--lav-deeper);line-height:1.1;position:relative;z-index:1}
+.hero h1 span{background:var(--teal);color:white;padding:2px 10px;border-radius:6px;display:inline-block}
+.hero-sub{font-size:14px;color:var(--lav-dark);opacity:0.8;margin-top:10px;position:relative;z-index:1}
+.main{flex:1;display:flex;align-items:center;justify-content:center;padding:3rem 1.5rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:700px;width:100%}
+.calc-card{background:var(--white);border-radius:20px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;animation:fadeUp .4s ease both;text-decoration:none;display:flex;flex-direction:column}
+.calc-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.1)}
+.calc-card:nth-child(2){animation-delay:.1s}
+.card-top{padding:2.5rem 2rem 2rem;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.card-top.lav{background:var(--lav-bg);border-bottom:1px solid var(--lav-border)}
+.card-top.sky{background:var(--sky);border-bottom:1px solid var(--sky-border)}
+.card-icon{width:60px;height:60px;border-radius:14px;display:flex;align-items:center;justify-content:center}
+.card-icon.lav{background:var(--lav-main)}
+.card-icon.sky{background:var(--sky-main)}
+.card-icon svg{width:30px;height:30px}
+.card-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.6}
+.card-label.lav{color:var(--lav-dark)}
+.card-label.sky{color:var(--sky-dark)}
+.card-name{font-family:'Raleway',sans-serif;font-size:22px;font-weight:900;line-height:1.1}
+.card-name.lav{color:var(--lav-deeper)}
+.card-name.sky{color:var(--sky-deeper)}
+.card-desc{font-size:13px;line-height:1.6;opacity:0.75}
+.card-desc.lav{color:var(--lav-dark)}
+.card-desc.sky{color:var(--sky-dark)}
+.card-bot{padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.card-cta{font-size:13px;font-weight:700}
+.card-cta.lav{color:var(--lav-dark)}
+.card-cta.sky{color:var(--sky-dark)}
+.card-arrow{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;transition:transform .15s}
+.card-arrow.lav{background:var(--lav-main)}
+.card-arrow.sky{background:var(--sky-main)}
+.calc-card:hover .card-arrow{transform:translateX(4px)}
+footer{background:var(--yellow);border-top:2px solid var(--yellow-dark);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.footer-brand{font-family:'Raleway',sans-serif;font-size:13px;font-weight:700;color:var(--lav-deeper)}
+.footer-note{font-size:12px;color:var(--lav-dark);opacity:0.7}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 20 20" fill="none">
+        <path d="M3 17l4-4m0 0l6-9 3 3-9 6zm0 0l-1 4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="15" cy="5" r="2" fill="#FFE600"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-name">MeliAir</div>
+      <div class="logo-sub">Operaci&#243;n A&#233;rea</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <a class="back-link" href="https://mtmtransportes-paginainiciales.vercel.app/">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Inicio
+    </a>
+    <a class="back-link" href="meliair-calculadoras-pt.html">Portugu&#234;s</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-badge">&#9992;&#65039; MELIAIR &mdash; OPERACI&#211;N A&#201;REA</div>
+  <h1>Selecciona una <span>Calculadora</span></h1>
+  <p class="hero-sub">Elige el tipo de operaci&#243;n para continuar</p>
+</div>
+
+<div class="main">
+  <div class="cards">
+    <a class="calc-card" href="#">
+      <div class="card-top lav">
+        <div class="card-icon lav">
+          <svg viewBox="0 0 30 30" fill="none">
+            <path d="M4 15h22M4 15l6-6M4 15l6 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="22" cy="10" r="3" fill="white" opacity=".4"/>
+            <circle cx="22" cy="20" r="3" fill="white" opacity=".4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="card-label lav">Ruta principal</div>
+          <div class="card-name lav">Line Haul</div>
+        </div>
+        <div class="card-desc lav">Calcula el costo del transporte principal entre origen y destino, considerando distancia, peso y tarifa base de la operaci&#243;n a&#233;rea.</div>
+      </div>
+      <div class="card-bot">
+        <span class="card-cta lav">Acceder a la calculadora</span>
+        <div class="card-arrow lav">&rarr;</div>
+      </div>
+    </a>
+
+    <a class="calc-card" href="#">
+      <div class="card-top sky">
+        <div class="card-icon sky">
+          <svg viewBox="0 0 30 30" fill="none">
+            <path d="M26 15H4M26 15l-6-6M26 15l-6 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="8" cy="10" r="3" fill="white" opacity=".4"/>
+            <circle cx="8" cy="20" r="3" fill="white" opacity=".4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="card-label sky">Ruta de retorno</div>
+          <div class="card-name sky">Back Haul</div>
+        </div>
+        <div class="card-desc sky">Calcula el costo del flete de retorno, optimizando la capacidad del veh&#237;culo en el camino de vuelta y reduciendo el costo operacional.</div>
+      </div>
+      <div class="card-bot">
+        <span class="card-cta sky">Acceder a la calculadora</span>
+        <div class="card-arrow sky">&rarr;</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Mercado Libre &mdash; MTM</div>
+  <div class="footer-note">MeliAir &middot; Calculadoras de Flete</div>
+</footer>
+</body>
+</html>
